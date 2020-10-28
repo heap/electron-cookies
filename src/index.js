@@ -12,7 +12,7 @@ const FAKE_APP_URI = 'https://yourdomain.heap/';
 (function(document) {
   const store = new WebStorageCookieStore(localStorage);
 
-  const cookiejar = new tough.CookieJar(store);
+  const cookiejar = new tough.CookieJar(store,false);
   Object.defineProperty(document, "cookie", {
     get() {
       return cookiejar.getCookieStringSync(FAKE_APP_URI);
