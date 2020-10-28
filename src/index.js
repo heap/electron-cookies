@@ -9,18 +9,15 @@ const { Cookie } = tough;
 // a cookie, rather than having a known set of public suffix domains.
 const FAKE_APP_URI = 'https://yourdomain.heap/';
 
-(function(document) {
-  const store = new WebStorageCookieStore(localStorage);
+const FAKE_APP_URI = 'https://' + window.location.host;  
 
-  const cookiejar = new tough.CookieJar(store);
-  Object.defineProperty(document, "cookie", {
-    get() {
-      return cookiejar.getCookieStringSync(FAKE_APP_URI);
-    },
-    set(cookie) {
-    // loose: true lets us accept cookies with key and no value, which the
-    // original tests for this library included.
-      cookiejar.setCookieSync(Cookie.parse(cookie, {loose: true}), FAKE_APP_URI);
+(function(document) {
+const store = new WebStorageCookieStore(localStorage);
+const cookiejar = new tough.CookieJar(store);
+const cookiejar = new tough.CookieJar(store, false); //false here sets the rejectPublicSuffix flag
+Object.defineProperty(document, "cookie", {
+get() {
+return cookiejar.getCookieStringSync(FAKE_APP_URI);
     }
   });
 })(document);
