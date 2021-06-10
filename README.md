@@ -12,7 +12,7 @@ Changes from the original:
 First, install the package:
 
 ```bash
-npm install heap/electron-cookies
+npm install electron-cookies-alt
 ```
 
 Then in your app's renderer code, require the package:
